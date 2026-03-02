@@ -1,16 +1,13 @@
 import { Prisma } from "@prisma/client";
 import SiderBar from "../components/sidebar";
 import { prisma } from "../lib/prisma";
-import { getCurrentUser } from "../lib/auth";
+import { getCurrentUser, requireAuth } from "../lib/auth";
 import { Key, TrendingUp } from "lucide-react";
 import ProductsChart from "../components/productChar";
 import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
-  const user = await getCurrentUser();
-  if (!user) {
-    redirect("/sign-in");
-  }
+  const user = await requireAuth(); 
   const userId = user.id;
 
   const [totalProducts, lowStock, allProducts] = await Promise.all([
