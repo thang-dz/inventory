@@ -1,8 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import inventory from "../public/inventory.jpg";
+import { getCurrentUser } from "./lib/auth";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const user = await getCurrentUser();
+
+  if (user) redirect("/dashboard");
   return (
     <div className=" min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className=" min-h-screen w-full flex   items-center justify-between py-32 px-16 bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-200 dark:bg-black sm:items-start">

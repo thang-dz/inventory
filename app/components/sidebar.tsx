@@ -20,7 +20,7 @@ export default function SiderBar({
           <div className="w-8 h-8 bg-amber-600 rounded-lg flex items-center justify-center">
             <BarChart3 className="w-5 h-5" />
           </div>
-          <span className="text-lg font-semibold">Analytics</span>
+          <span className="text-lg font-semibold">Inventory App</span>
         </div>
       </div>
       <nav className="space-y-1">
@@ -33,7 +33,7 @@ export default function SiderBar({
             <Link
               key={item.name}
               href={item.href}
-              className="flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors hover:bg-gray-800 text-gray-300"
+              className="flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors hover:bg-white hover:text-amber-950 text-gray-300"
             >
               <IconComponent className="w-5 h-5" />
               <span className="text-sm">{item.name}</span>
