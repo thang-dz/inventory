@@ -1,6 +1,6 @@
 "use server";
 import { redirect } from "next/navigation";
-import { getCurrentUser, requireAuth } from "../auth";
+import { getCurrentUser } from "../auth";
 import { prisma } from "../prisma";
 import z from "zod";
 
@@ -12,7 +12,7 @@ const ProductSchema = z.object({
   lowStockAt: z.coerce.number().int().min(0).optional(),
 });
 export async function deleteProduct(formData: FormData) {
-  const user = await requireAuth();
+  const user = await getCurrentUser();
   const id = String(formData.get("id") || "");
   await prisma.product.deleteMany({
     where: { id: id, userId: user.id },
@@ -20,7 +20,7 @@ export async function deleteProduct(formData: FormData) {
 }
 
 export async function CreateProduct(formData: FormData) {
-  const user = await requireAuth();
+  const user = await getCurrentUser();
   const parsed = ProductSchema.safeParse({
     name: formData.get("name"),
     price: formData.get("price"),

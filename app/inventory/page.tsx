@@ -1,5 +1,5 @@
 import SiderBar from "../components/sidebar";
-import { getCurrentUser, requireAuth } from "../lib/auth";
+import { getCurrentUser } from "../lib/auth";
 import { prisma } from "../lib/prisma";
 import { deleteProduct } from "../lib/actions/products";
 import Pagination from "../components/pagination";
@@ -9,7 +9,7 @@ export default async function InventoryPage({
 }: {
   searchParams: Promise<{ q?: String; page?: String }>;
 }) {
-  const user = await requireAuth();
+  const user = await getCurrentUser();
   const userId = user.id;
 
   const params = await searchParams;

@@ -1,13 +1,12 @@
 import { Prisma } from "@prisma/client";
 import SiderBar from "../components/sidebar";
 import { prisma } from "../lib/prisma";
-import { getCurrentUser, requireAuth } from "../lib/auth";
+import { getCurrentUser } from "../lib/auth";
 import { Key, TrendingUp } from "lucide-react";
 import ProductsChart from "../components/productChar";
-import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
-  const user = await requireAuth(); 
+  const user = await getCurrentUser();
   const userId = user.id;
 
   const [totalProducts, lowStock, allProducts] = await Promise.all([
@@ -200,9 +199,7 @@ export default async function DashboardPage() {
                 />
                 <div className="asolute inset-0 flex items-center justify-center">
                   <div className="text-center ">
-                    <div className="text-xl font-semibold text-gray-700 mt-18">
-                      67%
-                    </div>
+                    <div className="text-xl font-semibold text-gray-700 mt-18">67%</div>
                     <div className="text-sm text-gray-600">In Stock</div>
                   </div>
                 </div>
@@ -210,27 +207,16 @@ export default async function DashboardPage() {
             </div>
             <div className=" mt-6 space-y-2">
               <div className="flex items-center gap-5">
-                <div className=" w-3 h-3 rounded-full bg-green-200" />
-                <p className="text-sm ">
-                  In Stock :{" "}
-                  <span className="text-green-600 ml-5">{inStockPercent}%</span>
-                </p>
+                <div  className=" w-3 h-3 rounded-full bg-green-200"/>
+                <p className="text-sm ">In Stock : <span className="text-green-600 ml-5">{inStockPercent}%</span></p>
               </div>
               <div className="flex items-center gap-5">
-                <div className=" w-3 h-3 rounded-full bg-yellow-200" />
-                <p className="text-sm ">
-                  Low Stock :{" "}
-                  <span className="text-yellow-600 ml-5">
-                    {lowStockPercent}%
-                  </span>
-                </p>
+                <div  className=" w-3 h-3 rounded-full bg-yellow-200"/>
+                <p className="text-sm ">Low Stock : <span className="text-yellow-600 ml-5">{lowStockPercent}%</span></p>
               </div>
               <div className="flex items-center gap-5">
-                <div className=" w-3 h-3 rounded-full bg-red-200" />
-                <p className="text-sm ">
-                  Out Of Stock :{" "}
-                  <span className="text-red-600 ml-5">{outStockPercent}%</span>
-                </p>
+                <div  className=" w-3 h-3 rounded-full bg-red-200"/>
+                <p className="text-sm ">Out Of Stock : <span className="text-red-600 ml-5">{outStockPercent}%</span></p>
               </div>
             </div>
           </div>
