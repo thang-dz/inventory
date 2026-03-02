@@ -10,7 +10,7 @@ export default async function InventoryPage({
   searchParams: Promise<{ q?: String; page?: String }>;
 }) {
   const user = await getCurrentUser();
-  const userId = user.id;
+    const userId = user?.id ?? "";
 
   const params = await searchParams;
   const q = (params.q ?? "").trim();
@@ -41,7 +41,7 @@ export default async function InventoryPage({
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Inventory</h1>
           <p className="text-sm  text-gray-600">
-            Manage your products anf track stock levels
+            Manage your products and track stock levels
           </p>
         </div>
         <div className="space-y-6">
